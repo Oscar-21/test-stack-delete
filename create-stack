@@ -11,4 +11,7 @@ if [ -z "$stackname" ]
   then echo "usage: create-stack filename stackname" && exit
 fi
 
-aws cloudformation create-stack --stack-name "$stackname"  --template-body file://"$filename"
+aws cloudformation create-stack \
+  --stack-name "$stackname" \
+  --template-body file://"$filename" \
+  --capabilities CAPABILITY_NAMED_IAM
