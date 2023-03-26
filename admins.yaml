@@ -14,7 +14,7 @@ Resources:
     Properties:
       UserName: admin
       LoginProfile:
-        Password: password
+        Password: '{{resolve:secretsmanager:admin-temporary-password}}'
         PasswordResetRequired: true
       Tags:
         - Key: client
