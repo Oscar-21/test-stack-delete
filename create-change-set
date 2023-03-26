@@ -1,0 +1,9 @@
+#!/bin/bash
+
+stackname="$1"
+
+if [ -z "$stackname" ]
+  then echo "usage: create-stack filename stackname" && exit
+fi
+
+aws cloudformation create-change-set --stack-name "$stackname" --change-set-name uuidgen
