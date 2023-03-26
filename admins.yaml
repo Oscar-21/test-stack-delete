@@ -27,7 +27,7 @@ Resources:
   AddAdminToGroup:
     Type: AWS::IAM::UserToGroupAddition
     Properties:
-      GroupName: !!Ref AdminsGroup
+      GroupName: !Ref AdminsGroup
       Users:
         - !Ref AdminUser
       
