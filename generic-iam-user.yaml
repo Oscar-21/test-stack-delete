@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Template to create new IAM Groups consiting of managed policies
+
+Parameters:
+  UserName:
+    Type: String
+    Description: The username for the new IAM User
+  Password:
+    Type: String
+    Description: The temporary password for initial login
+
+Resources:
+
+  AdminUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: !Ref UserName
+      LoginProfile:
+        Password: '{{resolve:secretsmanager:admin-temporary-password}}'
+        PasswordResetRequired: true
+      Tags:
+        - Key: client
+          Value: chinatown
+        - Key: description
+          Value: admin created after initial account creation to prevent the need for the root acount login
+        - Key: created-by
+          Value: Austin Conder
+
+  AddAdminToGroup:
+    Type: AWS::IAM::UserToGroupAddition
+    Properties:
+      GroupName: !Ref AdminsGroup
+      Users:
+        - !Ref AdminUser

@@ -1,14 +1,20 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: Administrators Group
+Description: Template to create new IAM Groups consiting of managed policies
+
+Parameters:
+  GroupName:
+    Type: String
+    Description: The name of the new IAM Group
+
 Resources:
 
-  AdminsGroup:
+  IAMGroup:
     Type: AWS::IAM::Group
     Properties:
-      GroupName: administrators
+      GroupName: !Ref GroupName
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AdministratorAccess
- 
+
   AdminUser:
     Type: AWS::IAM::User
     Properties:
@@ -22,7 +28,7 @@ Resources:
         - Key: description
           Value: admin created after initial account creation to prevent the need for the root acount login
         - Key: created-by
-          Value: Austin Conder 
+          Value: Austin Conder
 
   AddAdminToGroup:
     Type: AWS::IAM::UserToGroupAddition
@@ -30,4 +36,3 @@ Resources:
       GroupName: !Ref AdminsGroup
       Users:
         - !Ref AdminUser
-      
