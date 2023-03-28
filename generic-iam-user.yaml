@@ -5,9 +5,6 @@ Parameters:
   UserName:
     Type: String
     Description: The username for the new IAM User
-  Password:
-    Type: String
-    Description: The temporary password for initial login
   Description:
     Type: String
     Default: New IAM User
@@ -29,16 +26,16 @@ Resources:
         PasswordResetRequired: true
       Tags:
         - Key: client
-          Value: !Ref 'chinatown'
+          Value: !Ref Client
         - Key: description
-          Value: !Ref 'Description'
+          Value: !Ref Description
         - Key: CreatedBy
-          Value: !Ref 'CreatedBy'
+          Value: !Ref CreatedBy
 
-#    Outputs:
-#      UserName:
-#        Description: todo
-#        Value: value
-#        Export:
-#          Name: !Ref 'User'
-
+Outputs:
+  UserName:
+    Value: !Ref User
+    Export:
+      Name: UserName
+  UserArn:
+    Value: !GetAtt User.Arn

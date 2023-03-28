@@ -10,7 +10,7 @@ Parameters:
   Users:
     Type: CommaDelimitedList
 
-#        - arn:aws:iam::aws:policy/AdministratorAccess
+# arn:aws:iam::aws:policy/AdministratorAccess
 Resources:
 
   IAMGroup:

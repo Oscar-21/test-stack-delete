@@ -1,0 +1,16 @@
+#!/bin/bash
+
+filename="$1"
+stackname="$2"
+
+if [ -z "$stackname" ]
+  then echo "usage: create-stack filename stackname" && exit
+fi
+
+aws cloudformation create-stack \
+  --stack-name "$stackname" \
+  --template-body file://generic-iam-user.yaml \
+  --capabilities CAPABILITY_NAMED_IAM \
+  --parameters \
+    ParameterKey=UserName,ParameterValue=admin \
+    ParameterKey=Description,ParameterValue="admin IAM User"
